@@ -40,6 +40,9 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@tanstack/react-query": "^5.83.0",
+    "@vechain/connex": "^2.2.1",
+    "@vechain/dapp-kit-react": "^1.0.12",
+    "@vechain/picasso": "^2.1.1",
     "@vechain/sdk-core": "^2.0.5",
     "@vechain/sdk-ethers-adapter": "^2.0.5",
     "@vechain/sdk-network": "^2.0.5",
@@ -63,6 +66,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.9",
+    "vite-plugin-node-polyfills": "^0.24.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {

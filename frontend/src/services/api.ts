@@ -1,15 +1,5 @@
-// API service for communicating with the backend
-const API_BASE_URL = 'http://localhost:3001'; // Adjust this to match your backend URL
-
-export interface BackendProduct {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  ef: number; // kg CO2 per kg
-  bestCo2g: number; // Best case CO2 in grams for ecoScore calculation
-  worstCo2g: number; // Worst case CO2 in grams for ecoScore calculation
-}
+// API service using local data (replaces backend)
+import { localApiService, Product as LocalProduct } from './local-api';
 
 export interface FrontendProduct {
   id: string;
@@ -24,13 +14,13 @@ export interface FrontendProduct {
   worstCo2g: number;
 }
 
-// Convert backend product to frontend product format
-export const convertBackendToFrontendProduct = (backendProduct: BackendProduct): FrontendProduct => {
+// Convert local product to frontend product format
+export const convertLocalToFrontendProduct = (localProduct: LocalProduct): FrontendProduct => {
   // Calculate ecoScore based on emission factor (kg CO2 per kg)
   // Lower emission factor = higher eco score
   // Scale: 0-5 kg CO2/kg = 100-80, 5-15 = 80-60, 15-30 = 60-40, 30+ = 40-0
   let ecoScore: number;
-  const ef = backendProduct.ef;
+  const ef = localProduct.ef;
   
   if (ef <= 5) {
     ecoScore = Math.max(80, 100 - (ef * 4)); // 100-80 for 0-5 range
@@ -43,29 +33,25 @@ export const convertBackendToFrontendProduct = (backendProduct: BackendProduct):
   }
   
   return {
-    id: backendProduct.id,
-    name: backendProduct.name,
+    id: localProduct.id,
+    name: localProduct.name,
     ecoScore: Math.round(ecoScore),
-    carbonFootprint: backendProduct.ef, // Use emission factor as carbon footprint
-    metadata: `${backendProduct.description} | Category: ${backendProduct.category}`,
-    category: backendProduct.category,
-    description: backendProduct.description,
-    ef: backendProduct.ef,
-    bestCo2g: backendProduct.bestCo2g,
-    worstCo2g: backendProduct.worstCo2g,
+    carbonFootprint: localProduct.ef, // This is actually the emission factor, not carbon footprint
+    metadata: `${localProduct.description} | Category: ${localProduct.category}`,
+    category: localProduct.category,
+    description: localProduct.description,
+    ef: localProduct.ef,
+    bestCo2g: localProduct.bestCo2g,
+    worstCo2g: localProduct.worstCo2g,
   };
 };
 
 export const api = {
-  // Fetch all products from backend
+  // Fetch all products from local API
   async getProducts(): Promise<FrontendProduct[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/products`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const backendProducts: BackendProduct[] = await response.json();
-      return backendProducts.map(convertBackendToFrontendProduct);
+      const localProducts = await localApiService.getProducts();
+      return localProducts.map(convertLocalToFrontendProduct);
     } catch (error) {
       console.error('Error fetching products:', error);
       throw error;
@@ -75,15 +61,11 @@ export const api = {
   // Fetch single product by ID
   async getProduct(id: string): Promise<FrontendProduct | null> {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/${id}`);
-      if (!response.ok) {
-        if (response.status === 404) {
-          return null;
-        }
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const localProduct = await localApiService.getProduct(id);
+      if (!localProduct) {
+        return null;
       }
-      const backendProduct: BackendProduct = await response.json();
-      return convertBackendToFrontendProduct(backendProduct);
+      return convertLocalToFrontendProduct(localProduct);
     } catch (error) {
       console.error('Error fetching product:', error);
       throw error;
@@ -93,11 +75,7 @@ export const api = {
   // Get emission factors
   async getEmissionFactors() {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/emission-factors`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
+      return await localApiService.getEmissionFactors();
     } catch (error) {
       console.error('Error fetching emission factors:', error);
       throw error;

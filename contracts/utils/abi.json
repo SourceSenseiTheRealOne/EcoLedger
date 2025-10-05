@@ -1,0 +1,15 @@
+[
+  "constructor()",
+  "event ProductAdded(uint256 indexed,string,string,uint256,uint256,address)",
+  "event ProductUpdated(uint256 indexed,string,uint256)",
+  "function addProduct(string,string,string,uint256,uint256) returns (uint256)",
+  "function getProduct(uint256) view returns (string,string,string,uint256,uint256,uint256,address)",
+  "function getStats() view returns (uint256,uint256,uint256)",
+  "function getTotalProducts() view returns (uint256)",
+  "function getUserProducts(address) view returns (uint256[])",
+  "function owner() view returns (address)",
+  "function productCounter() view returns (uint256)",
+  "function products(uint256) view returns (string,string,string,uint256,uint256,uint256,address,bool)",
+  "function updateEcoScore(uint256,uint256)",
+  "function userProducts(address,uint256) view returns (uint256)"
+]

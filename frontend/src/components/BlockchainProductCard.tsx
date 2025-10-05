@@ -100,9 +100,15 @@ export function BlockchainProductCard({
               <ExternalLink className="w-3 h-3 mr-1" />
               View on VeChain Explorer
             </Button>
-            <div className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
-              <strong>Demo Mode:</strong> This is a simulated transaction hash. In production, this would be a real VeChain transaction.
-            </div>
+            {txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched' ? (
+              <div className="text-xs text-green-600 bg-green-50 p-2 rounded border border-green-200">
+                <strong>Live Transaction:</strong> This is a real VeChain testnet transaction. Click to view in explorer.
+              </div>
+            ) : (
+              <div className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
+                <strong>Note:</strong> Transaction hash not available for this product.
+              </div>
+            )}
           </div>
         </div>
 
@@ -116,14 +122,17 @@ export function BlockchainProductCard({
         <div className="flex justify-center pt-2">
           <div className="p-4 rounded-xl bg-background border-2 border-border">
             <QRCodeSVG 
-              value={JSON.stringify({ 
-                id, 
-                name, 
-                ecoScore, 
-                carbonFootprint, 
-                txHash,
-                blockchain: 'VeChain'
-              })}
+              value={txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched' 
+                ? `https://explore-testnet.vechain.org/transactions/${txHash}`
+                : JSON.stringify({ 
+                    id, 
+                    name, 
+                    ecoScore, 
+                    carbonFootprint, 
+                    txHash,
+                    blockchain: 'VeChain'
+                  })
+              }
               size={120}
               level="H"
               includeMargin={false}
@@ -133,7 +142,10 @@ export function BlockchainProductCard({
         </div>
         
         <p className="text-xs text-center text-muted-foreground">
-          Scan to verify product authenticity on blockchain
+          {txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched' 
+            ? 'Scan to view transaction on VeChain Explorer'
+            : 'Scan to view product details'
+          }
         </p>
       </CardContent>
     </Card>

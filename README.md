@@ -1,110 +1,171 @@
-# 🌱 EcoLedger - Blockchain-Powered Carbon Footprint Tracking
+# 🌱 EcoLedger - Blockchain Sustainability Platform
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![VeChain](https://img.shields.io/badge/Blockchain-VeChain-green.svg)](https://vechain.org)
-[![React](https://img.shields.io/badge/Frontend-React-blue.svg)](https://reactjs.org)
-[![NestJS](https://img.shields.io/badge/Backend-NestJS-red.svg)](https://nestjs.com)
+> **VeChain Hackathon MVP** - A decentralized application for tracking and verifying product sustainability data on the blockchain.
 
-> **A decentralized platform for tracking product carbon footprints and eco-scores using VeChain blockchain technology**
+[![VeChain](https://img.shields.io/badge/VeChain-Testnet-blue)](https://www.vechain.org/)
+[![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![Solidity](https://img.shields.io/badge/Solidity-0.8.20-green)](https://soliditylang.org/)
 
 ## 📋 Table of Contents
 
-- [🌱 About EcoLedger](#-about-ecoledger)
-- [✨ Key Features](#-key-features)
-- [🏗️ Tech Stack](#️-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-- [📖 Technical Documentation](#-technical-documentation)
-- [🔗 API Documentation](#-api-documentation)
-- [🌐 Blockchain Integration](#-blockchain-integration)
-- [📱 User Interface](#-user-interface)
-- [🛠️ Development](#️-development)
-- [🚀 Deployment](#-deployment)
-- [📈 Business Plan & Roadmap](#-business-plan--roadmap)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Smart Contract](#smart-contract)
+- [Frontend](#frontend)
+- [API Endpoints](#api-endpoints)
+- [Blockchain Integration](#blockchain-integration)
+- [Development](#development)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 🌱 About EcoLedger
+## 🎯 Overview
 
-EcoLedger is a revolutionary blockchain-based platform that enables consumers and businesses to track, verify, and manage the carbon footprint of products throughout their lifecycle. Built on VeChain's enterprise-grade blockchain, EcoLedger provides transparent, immutable, and verifiable carbon footprint data that promotes sustainable consumption and environmental responsibility.
+**EcoLedger** is a blockchain-based sustainability platform that allows users to register, track, and verify the environmental impact of products. Built for the VeChain Hackathon, this MVP demonstrates how blockchain technology can create transparent, immutable records of product sustainability data.
 
-### 🎯 Mission
+### 🏆 Hackathon Context
 
-To create a transparent, trustworthy ecosystem where every product's environmental impact is tracked, verified, and accessible to all stakeholders, driving the transition to a sustainable economy.
+This project was developed as an **MVP (Minimum Viable Product)** for the VeChain Hackathon. It showcases the core functionality of a sustainability tracking platform using VeChain's blockchain technology. A complete, production-ready dApp will be developed after the hackathon with additional features, enhanced security, and scalability improvements.
 
-### 🌍 Vision
+### 🌟 Key Value Propositions
 
-A world where consumers can make informed decisions based on verified environmental data, and businesses are incentivized to reduce their carbon footprint through transparent, blockchain-verified sustainability metrics.
+- **Transparency**: All product data is stored on the blockchain, ensuring immutability and transparency
+- **Verification**: Products can be verified by scanning QR codes linked to blockchain transactions
+- **Accessibility**: Anyone with a wallet can register products without complex company registration
+- **Real-time**: Live blockchain integration with VeChain testnet
+- **User-friendly**: Intuitive interface for both technical and non-technical users
 
-## ✨ Key Features
+## ✨ Features
 
-### 🔍 **Product Carbon Footprint Tracking**
-- Real-time carbon footprint calculation based on emission factors
-- Comprehensive product database with verified environmental data
-- Dynamic eco-score calculation (0-100 scale)
-- Category-based emission factor analysis
+### 🔗 Blockchain Integration
+- **VeChain Testnet**: Live blockchain integration with real transactions
+- **Wallet Connection**: VeChain DAppKit for seamless wallet integration
+- **Transaction Verification**: QR codes link to VeChain Explorer for transaction verification
+- **Real-time Data**: Products fetched directly from blockchain
 
-### ⛓️ **Blockchain Integration**
-- **VeChain Testnet/Mainnet** integration for immutable data storage
-- Smart contract-based product registration and verification
-- Transparent transaction history and audit trails
-- Decentralized data ownership and control
+### 📊 Product Management
+- **Product Registry**: 16 pre-loaded sustainable products with real emission factors
+- **EcoScore Calculation**: Dynamic sustainability scoring (0-100 scale)
+- **Carbon Footprint Tracking**: CO2 emissions calculated and stored on blockchain
+- **Category Classification**: Products organized by material type and sustainability impact
 
-### 📱 **User-Friendly Interface**
-- Intuitive dashboard for product management
-- QR code generation and scanning capabilities
-- Real-time blockchain transaction tracking
-- Mobile-responsive design
+### 🎨 User Interface
+- **Responsive Design**: Mobile-first design with desktop optimization
+- **Tab-based Navigation**: Organized interface for different functionalities
+- **Real-time Stats**: Dynamic statistics based on selected products
+- **Interactive Cards**: Product cards with blockchain integration
 
-### 🔐 **Wallet Integration**
-- Secure VeChain wallet connection
-- Private key management
-- Transaction signing and verification
-- Multi-wallet support
+### 🔧 Technical Features
+- **Frontend-only Architecture**: No backend server required
+- **Local API**: All product data and calculations handled in frontend
+- **TypeScript**: Full type safety and better development experience
+- **Modern React**: Hooks, context, and modern React patterns
 
-### 📊 **Analytics & Reporting**
-- Carbon footprint analytics and trends
-- Eco-score distribution analysis
-- User sustainability metrics
-- Export capabilities for reporting
+## 🏗️ Architecture
 
-## 🏗️ Tech Stack
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Frontend (React + TypeScript)            │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
+│  │   Dashboard │  │  Components │  │   Services  │         │
+│  │             │  │             │  │             │         │
+│  │ • Product   │  │ • Product   │  │ • Local API │         │
+│  │   Registry  │  │   Cards     │  │ • Blockchain│         │
+│  │ • Blockchain│  │ • QR Codes  │  │ • VeChain   │         │
+│  │   Products  │  │ • Forms     │  │   DAppKit   │         │
+│  └─────────────┘  └─────────────┘  └─────────────┘         │
+└─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    VeChain Testnet                          │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
+│  │ EcoLedger   │  │ VeChain     │  │ VeChain     │         │
+│  │ Smart       │  │ DAppKit     │  │ Explorer    │         │
+│  │ Contract    │  │ Wallet      │  │ (QR Links)  │         │
+│  │             │  │ Integration │  │             │         │
+│  └─────────────┘  └─────────────┘  └─────────────┘         │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### **Frontend**
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **UI Library**: Radix UI + Tailwind CSS
-- **State Management**: React Hooks + Context
-- **Routing**: React Router DOM
-- **Charts**: Recharts
-- **QR Codes**: qrcode.react
-- **Forms**: React Hook Form + Zod validation
+## 🛠️ Tech Stack
 
-### **Backend**
-- **Framework**: NestJS (Node.js)
-- **Language**: TypeScript
-- **Architecture**: Modular microservices
-- **API**: RESTful APIs
-- **Validation**: Class-validator
+### Frontend
+- **React 18** - Modern React with hooks and context
+- **TypeScript** - Type safety and better development experience
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework
+- **Shadcn/ui** - Modern UI component library
+- **Lucide React** - Beautiful icons
 
-### **Blockchain**
-- **Network**: VeChain Testnet/Mainnet
-- **Smart Contracts**: Solidity ^0.8.19
-- **SDK**: VeChain SDK Core, Network, Ethers Adapter
-- **Wallet**: VeChain-compatible wallets (VeWorld, Sync2)
+### Blockchain
+- **VeChain** - Blockchain platform for sustainability tracking
+- **VeChain DAppKit** - Wallet integration and blockchain interaction
+- **Solidity 0.8.20** - Smart contract development
+- **Hardhat** - Development environment for smart contracts
+- **OpenZeppelin** - Secure smart contract libraries
 
-### **Development Tools**
-- **Package Manager**: npm
-- **Linting**: ESLint + Prettier
-- **Testing**: Jest (Backend)
-- **Version Control**: Git
-- **IDE**: VS Code recommended
+### Development Tools
+- **ESLint** - Code linting and quality
+- **Prettier** - Code formatting
+- **React Query** - Data fetching and caching
+- **React Router** - Client-side routing
 
-## 🚀 Quick Start
+## 📁 Project Structure
+
+```
+EcoLedger/
+├── frontend/                 # React frontend application
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   │   ├── ui/         # Shadcn/ui components
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── BlockchainProductCard.tsx
+│   │   │   ├── RegisterProductForm.tsx
+│   │   │   └── ...
+│   │   ├── hooks/          # Custom React hooks
+│   │   │   ├── useBlockchain.ts
+│   │   │   ├── useProducts.ts
+│   │   │   └── ...
+│   │   ├── pages/          # Page components
+│   │   │   ├── Dashboard.tsx
+│   │   │   └── NotFound.tsx
+│   │   ├── services/       # API and blockchain services
+│   │   │   ├── api.ts
+│   │   │   ├── local-api.ts
+│   │   │   ├── vechain-dappkit.ts
+│   │   │   └── ...
+│   │   └── util/           # Utility functions
+│   ├── public/             # Static assets
+│   ├── package.json
+│   └── vite.config.ts
+├── contracts/              # Smart contracts
+│   ├── contracts/
+│   │   └── EcoLedger.sol   # Main smart contract
+│   ├── scripts/
+│   │   └── deploy-ecoledger.ts
+│   ├── test/
+│   │   └── EcoLedger.test.ts
+│   ├── hardhat.config.ts
+│   └── package.json
+├── backend/                # NestJS backend (optional)
+│   └── api/               # API endpoints and services
+└── README.md
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - **Node.js** (v18 or higher)
-- **npm** (v8 or higher)
+- **npm** or **yarn**
 - **Git**
 - **VeChain Wallet** (VeWorld or Sync2)
 
@@ -116,394 +177,292 @@ A world where consumers can make informed decisions based on verified environmen
    cd ecoledger
    ```
 
-2. **Install dependencies**
+2. **Install frontend dependencies**
    ```bash
-   # Install backend dependencies
-   cd backend/api
-   npm install
-
-   # Install frontend dependencies
-   cd ../../frontend
-   npm install
-   ```
-
-3. **Start the development servers**
-   ```bash
-   # Terminal 1: Start backend
-   cd backend/api
-   npm run start:dev
-
-   # Terminal 2: Start frontend
    cd frontend
-   npm run dev
+   npm install
    ```
 
-4. **Access the application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:3001
+3. **Install contract dependencies** (optional)
+   ```bash
+   cd ../contracts
+   npm install
+   ```
 
-### 🎯 First Steps
+### Running the Application
 
-1. **Connect Wallet**: Click "Connect Wallet" to connect your VeChain wallet
-2. **Add Products**: Use the "Add from DB" tab to select products from the database
-3. **Add to Blockchain**: Click "Add to Chain" to store products on VeChain
-4. **Generate QR Codes**: Create QR codes for easy product sharing
-5. **View on Explorer**: Click "View on VeChain Explorer" to see blockchain transactions
-
-## 📖 Technical Documentation
-
-### Architecture Overview
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend API   │    │   VeChain       │
-│   (React)       │◄──►│   (NestJS)      │◄──►│   Blockchain    │
-│                 │    │                 │    │                 │
-│ • Dashboard     │    │ • Products API  │    │ • Smart Contract│
-│ • Wallet Conn   │    │ • CO2 Service   │    │ • Transactions  │
-│ • QR Generator  │    │ • Validation    │    │ • Events        │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+#### Frontend Development
+```bash
+cd frontend
+npm run dev
 ```
 
-### Smart Contract
 
-**Contract**: `EcoLedger.sol`
-**Network**: VeChain Testnet/Mainnet
-**Functions**:
-- `addProduct()` - Add new product with carbon data
-- `getProduct()` - Retrieve product information
-- `getUserProducts()` - Get user's products
-- `updateEcoScore()` - Update product eco-score
-- `getStats()` - Get platform statistics
-
-### Data Flow
-
-1. **Product Selection**: User selects products from database
-2. **Eco-Score Calculation**: Backend calculates carbon footprint and eco-score
-3. **Blockchain Storage**: Product data stored on VeChain via smart contract
-4. **Transaction Verification**: Transaction hash generated and stored
-5. **QR Code Generation**: QR codes created for easy sharing
-6. **Explorer Integration**: Direct links to VeChain explorer for verification
-
-## 🔗 API Documentation
-
-### Products Endpoint
-
-```http
-GET /products
-```
-**Response**:
-```json
-{
-  "products": [
-    {
-      "id": "1",
-      "name": "Organic Cotton T-Shirt",
-      "category": "Clothing",
-      "description": "100% organic cotton t-shirt",
-      "ef": 2.5,
-      "bestCo2g": 2.0,
-      "worstCo2g": 3.0
-    }
-  ]
-}
+#### Smart Contract Development
+```bash
+cd contracts
+npm run compile          # Compile contracts
+npm run test            # Run tests
+npm run deploy:testnet  # Deploy to VeChain testnet
 ```
 
-### CO2 Calculation
+## 📜 Smart Contract
 
-```http
-POST /co2/calculate
+### EcoLedger Contract
+
+The `EcoLedger.sol` contract is deployed on VeChain testnet and provides:
+
+#### Key Functions
+- `registerProduct()` - Register a new product with sustainability data
+- `getWalletProducts()` - Get all products registered by a wallet
+- `getProduct()` - Get specific product information
+- `getGlobalStats()` - Get global sustainability statistics
+- `updateProductCo2()` - Update product CO2 footprint
+- `updateProductTxHash()` - Update product transaction hash
+
+#### Contract Address
 ```
-**Request Body**:
-```json
-{
-  "emissionFactor": 2.5,
-  "weight": 0.2
-}
-```
-**Response**:
-```json
-{
-  "carbonFootprint": 0.5,
-  "ecoScore": 85
-}
+VeChain Testnet: 0x92e647e3bc952154e8336673c4acd1acdcbe63eb
 ```
 
-## 🌐 Blockchain Integration
+#### Contract Features
+- **No Company Registration**: Anyone can register products directly
+- **Wallet-based Ownership**: Products are associated with wallet addresses
+- **Transaction Hash Storage**: Each product stores its registration transaction hash
+- **Global Statistics**: Track total products, wallets, and CO2 footprint
+- **Immutable Records**: All data is stored permanently on the blockchain
 
-### VeChain Smart Contract
+## 🎨 Frontend
 
-The `EcoLedger` smart contract provides:
+### Main Components
 
-- **Immutable Storage**: Product data stored permanently on blockchain
-- **Transparency**: All transactions are publicly verifiable
-- **Ownership**: Users own their product data
-- **Events**: Real-time notifications for product additions/updates
+#### Dashboard
+- **Product Registry**: View and manage selected products
+- **Blockchain Products**: View products stored on blockchain
+- **Add from Database**: Select from 16 pre-loaded sustainable products
+- **Wallet Connection**: Connect VeChain wallet
+- **Register New**: Register custom products
 
-### Wallet Integration
+#### Product Cards
+- **EcoScore Display**: Visual sustainability score (0-100)
+- **Carbon Footprint**: CO2 emissions in kg
+- **Blockchain Integration**: Add products to blockchain
+- **QR Code Generation**: Automatic QR codes for blockchain products
 
-- **VeWorld Wallet**: Primary wallet integration
-- **Sync2 Wallet**: Alternative wallet option
-- **Private Key**: Secure key management
-- **Transaction Signing**: Automatic transaction signing
+#### Responsive Design
+- **Mobile-first**: Optimized for mobile devices
+- **Desktop Support**: Enhanced experience on larger screens
+- **Touch-friendly**: Easy interaction on all devices
+
+## 🔌 API Endpoints
+
+### Local API (Frontend)
+
+All API endpoints are now handled locally in the frontend:
+
+#### Products
+- `GET /products` - Get all products
+- `GET /products/:id` - Get specific product
+- `GET /products/emission-factors` - Get emission factors
+
+#### CO2 Calculations
+- `POST /co2/calculate` - Calculate CO2 footprint
+- `POST /co2/calculate-simple` - Simple CO2 calculation
+- `GET /co2/ecoscore-interpretation` - Get EcoScore interpretation
+
+### Product Data
+
+The application includes 16 pre-loaded sustainable products:
+
+#### Excellent EcoScore (80-100)
+- Bamboo Cutlery Set (0.5 kg CO2/kg)
+- Recycled Paper Notebook (0.8 kg CO2/kg)
+- Recycled Glass Bottle (1.0 kg CO2/kg)
+- Cardboard Packaging Box (1.2 kg CO2/kg)
+
+#### Good EcoScore (60-79)
+- Recycled Steel Water Bottle (0.5 kg CO2/kg)
+- Recycled Aluminum Can (2.5 kg CO2/kg)
+- Concrete Building Block (0.13 kg CO2/kg)
+- Polyester Jacket (5.5 kg CO2/kg)
+
+#### Average EcoScore (40-59)
+- Virgin Plastic Bottle (6.0 kg CO2/kg)
+- Aluminum Foil (8.2 kg CO2/kg)
+- Cotton T-Shirt (27.0 kg CO2/kg)
+- Leather Wallet (15.0 kg CO2/kg)
+
+#### Poor EcoScore (20-39)
+- Smartphone (25.0 kg CO2/kg)
+- Cement Block (0.9 kg CO2/kg)
+- Laptop Computer (30.0 kg CO2/kg)
+- Beef Jerky (60.0 kg CO2/kg)
+
+## ⛓️ Blockchain Integration
+
+### VeChain DAppKit
+
+The application uses VeChain DAppKit for:
+
+- **Wallet Connection**: Seamless wallet integration
+- **Transaction Signing**: Secure transaction signing
+- **Network Interaction**: Direct interaction with VeChain testnet
+- **Event Listening**: Real-time blockchain event monitoring
 
 ### Transaction Flow
 
-1. User initiates product addition
-2. Frontend calls smart contract function
-3. Transaction signed with user's private key
-4. Transaction broadcast to VeChain network
-5. Transaction hash returned and stored
-6. User can view transaction on VeChain explorer
+1. **User Selects Product**: Choose from database or register new
+2. **Wallet Connection**: Connect VeChain wallet
+3. **Transaction Creation**: Create blockchain transaction
+4. **User Approval**: User signs transaction in wallet
+5. **Blockchain Confirmation**: Transaction confirmed on VeChain
+6. **QR Code Generation**: Automatic QR code with transaction hash
+7. **Explorer Integration**: QR code links to VeChain Explorer
 
-## 📱 User Interface
+### QR Code Integration
 
-### Dashboard Features
-
-- **Product Management**: Add, view, and manage products
-- **Wallet Connection**: Secure VeChain wallet integration
-- **QR Code Generation**: Create shareable QR codes
-- **Blockchain Integration**: Add products to VeChain
-- **Explorer Links**: Direct access to VeChain explorer
-
-### Components
-
-- **ProductCard**: Display product information and actions
-- **BlockchainProductCard**: Show blockchain-stored products
-- **WalletConnection**: Handle wallet connection and management
-- **QRCodeGenerator**: Generate QR codes for products
-- **WelcomeModal**: Onboarding and tutorial system
+- **Automatic Generation**: QR codes generated for all blockchain products
+- **VeChain Explorer**: Direct links to transaction details
+- **Verification**: Users can verify products by scanning QR codes
+- **Mobile-friendly**: Easy scanning with mobile devices
 
 ## 🛠️ Development
 
-### Project Structure
+### Available Scripts
 
-```
-ecoledger/
-├── frontend/                 # React frontend application
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── pages/          # Page components
-│   │   ├── services/       # API and blockchain services
-│   │   └── lib/            # Utility functions
-│   └── package.json
-├── backend/                 # NestJS backend API
-│   └── api/
-│       ├── src/
-│       │   ├── products/   # Products module
-│       │   ├── co2/        # CO2 calculation module
-│       │   └── main.ts     # Application entry point
-│       └── package.json
-├── contracts/               # Smart contracts
-│   └── EcoLedger.sol       # Main smart contract
-├── scripts/                 # Deployment scripts
-└── docs/                   # Documentation
-```
-
-### Development Commands
-
+#### Frontend
 ```bash
-# Backend development
-cd backend/api
-npm run start:dev          # Start with hot reload
-npm run build              # Build for production
-npm run test               # Run tests
-npm run lint               # Run linter
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run type-check   # Run TypeScript type checking
+```
 
-# Frontend development
-cd frontend
-npm run dev                # Start development server
-npm run build              # Build for production
-npm run preview            # Preview production build
-npm run lint               # Run linter
+#### Smart Contracts
+```bash
+npm run compile      # Compile contracts
+npm run test         # Run tests
+npm run deploy       # Deploy to testnet
+npm run verify       # Verify contract on explorer
 ```
 
 ### Environment Variables
 
-Create `.env` files in both frontend and backend directories:
-
-**Frontend (.env)**:
+#### Frontend
 ```env
-VITE_API_BASE_URL=http://localhost:3001
 VITE_VECHAIN_NETWORK=testnet
-VITE_CONTRACT_ADDRESS=0x...
+VITE_CONTRACT_ADDRESS=0x92e647e3bc952154e8336673c4acd1acdcbe63eb
 ```
 
-**Backend (.env)**:
+#### Smart Contracts
 ```env
-PORT=3001
-NODE_ENV=development
+VECHAIN_PRIVATE_KEY=your_private_key
+VECHAIN_NETWORK=testnet
 ```
+
+### Code Quality
+
+- **TypeScript**: Full type safety
+- **ESLint**: Code linting and quality
+- **Prettier**: Code formatting
+- **Husky**: Git hooks for quality checks
 
 ## 🚀 Deployment
 
-### VeChain Testnet Deployment
+### Frontend Deployment
 
-1. **Get Test VET Tokens**
-   - Visit [VeChain Faucet](https://faucet.vecha.in)
-   - Request test VET tokens for gas fees
+#### Vercel (Recommended)
+```bash
+npm run build
+# Deploy to Vercel
+```
 
-2. **Deploy Smart Contract**
-   - Use [VeChain IDE](https://ide.vecha.in)
-   - Deploy `EcoLedger.sol` to Testnet
-   - Save contract address
+#### Netlify
+```bash
+npm run build
+# Deploy to Netlify
+```
 
-3. **Update Configuration**
-   - Update contract address in frontend services
-   - Configure VeChain network settings
+#### Static Hosting
+```bash
+npm run build
+# Upload dist/ folder to any static hosting
+```
 
-4. **Deploy Frontend**
-   - Build production version
-   - Deploy to hosting service (Vercel, Netlify, etc.)
+### Smart Contract Deployment
 
-### Production Deployment
+#### VeChain Testnet
+```bash
+cd contracts
+npm run deploy:testnet
+```
 
-1. **Deploy to VeChain Mainnet**
-2. **Update contract addresses**
-3. **Configure production environment**
-4. **Deploy to production servers**
+#### VeChain Mainnet
+```bash
+cd contracts
+npm run deploy:mainnet
+```
 
-## 📈 Business Plan & Roadmap
+## 🔮 Future Development
 
-### 🎯 Business Model
+### Post-Hackathon Roadmap
 
-#### **Revenue Streams**
+#### Phase 1: Enhanced Features
+- **Company Registration**: Optional company profiles
+- **Product Verification**: Third-party verification system
+- **Supply Chain Tracking**: Multi-step supply chain tracking
+- **Carbon Credits**: Integration with carbon credit markets
 
-1. **SaaS Subscription**
-   - **Basic Plan**: $29/month - Up to 100 products
-   - **Professional Plan**: $99/month - Up to 1,000 products
-   - **Enterprise Plan**: $299/month - Unlimited products + API access
+#### Phase 2: Advanced Functionality
+- **AI Integration**: Machine learning for sustainability scoring
+- **IoT Integration**: Real-time sensor data integration
+- **Multi-chain Support**: Support for other blockchain networks
+- **Mobile App**: Native mobile applications
 
-2. **API Licensing**
-   - **Developer API**: $0.01 per API call
-   - **Enterprise API**: Custom pricing for high-volume usage
-   - **White-label Solutions**: Custom implementation for large clients
+#### Phase 3: Enterprise Features
+- **Enterprise Dashboard**: Advanced analytics and reporting
+- **API Access**: Public API for third-party integrations
+- **White-label Solution**: Customizable platform for enterprises
+- **Compliance Tools**: Regulatory compliance features
 
-3. **Carbon Credits Marketplace**
-   - **Transaction Fees**: 2-5% on carbon credit trades
-   - **Verification Services**: $50-200 per verification
-   - **Certification Programs**: $500-2,000 per certification
+### Technical Improvements
 
-4. **Data Analytics & Insights**
-   - **Sustainability Reports**: $500-5,000 per report
-   - **Industry Benchmarks**: $1,000-10,000 per benchmark
-   - **Custom Analytics**: $2,000-20,000 per project
+#### Security
+- **Audit**: Professional smart contract audit
+- **Multi-sig**: Multi-signature wallet integration
+- **Access Control**: Role-based access control
+- **Encryption**: End-to-end encryption for sensitive data
 
-#### **Target Market**
+#### Scalability
+- **Layer 2**: Integration with VeChain Layer 2 solutions
+- **Database**: Hybrid blockchain-database architecture
+- **Caching**: Advanced caching strategies
+- **CDN**: Content delivery network integration
 
-1. **Primary**: Sustainability-focused companies (500-5,000 employees)
-2. **Secondary**: E-commerce platforms and marketplaces
-3. **Tertiary**: Government agencies and NGOs
-4. **Future**: Individual consumers and small businesses
-
-### 🗺️ Roadmap
-
-#### **Phase 1: MVP & Foundation (Q1 2024)**
-- ✅ Core platform development
-- ✅ VeChain blockchain integration
-- ✅ Basic product tracking
-- ✅ QR code generation
-- ✅ Wallet integration
-
-#### **Phase 2: Market Entry (Q2 2024)**
-- 🔄 Beta testing with 10 pilot customers
-- 🔄 Smart contract optimization
-- 🔄 Mobile app development
-- 🔄 API documentation and developer tools
-- 🔄 Initial marketing and partnerships
-
-#### **Phase 3: Scale & Growth (Q3-Q4 2024)**
-- 📋 Public launch and marketing campaign
-- 📋 Enterprise customer acquisition
-- 📋 Advanced analytics and reporting
-- 📋 Carbon credits marketplace
-- 📋 International expansion
-
-#### **Phase 4: Ecosystem Development (2025)**
-- 📋 Third-party integrations
-- 📋 Industry-specific solutions
-- 📋 AI-powered sustainability insights
-- 📋 Carbon offset programs
-- 📋 Regulatory compliance tools
-
-#### **Phase 5: Global Impact (2026+)**
-- 📋 Global carbon tracking network
-- 📋 Government partnerships
-- 📋 Climate impact measurement
-- 📋 Sustainable supply chain solutions
-- 📋 Carbon neutrality certification
-
-### 💰 Financial Projections
-
-#### **Year 1 (2024)**
-- **Revenue**: $50,000 - $100,000
-- **Customers**: 50-100
-- **Team Size**: 5-8 people
-- **Focus**: Product development and market validation
-
-#### **Year 2 (2025)**
-- **Revenue**: $500,000 - $1,000,000
-- **Customers**: 500-1,000
-- **Team Size**: 15-25 people
-- **Focus**: Scale and enterprise sales
-
-#### **Year 3 (2026)**
-- **Revenue**: $2,000,000 - $5,000,000
-- **Customers**: 2,000-5,000
-- **Team Size**: 30-50 people
-- **Focus**: International expansion and ecosystem
-
-### 🎯 Key Metrics
-
-- **Monthly Recurring Revenue (MRR)**
-- **Customer Acquisition Cost (CAC)**
-- **Customer Lifetime Value (CLV)**
-- **Churn Rate**
-- **API Usage and Adoption**
-- **Carbon Footprint Reduction Impact**
+#### User Experience
+- **Progressive Web App**: PWA capabilities
+- **Offline Support**: Offline functionality
+- **Accessibility**: WCAG compliance
+- **Internationalization**: Multi-language support
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help:
+### Hackathon Contributions
 
-### **Ways to Contribute**
+This project was developed for the VeChain Hackathon. Contributions are welcome:
 
-1. **Code Contributions**
-   - Bug fixes and feature implementations
-   - Performance optimizations
-   - Test coverage improvements
+1. **Fork the repository**
+2. **Create a feature branch**
+3. **Make your changes**
+4. **Submit a pull request**
 
-2. **Documentation**
-   - API documentation updates
-   - User guides and tutorials
-   - Code comments and examples
+### Development Guidelines
 
-3. **Testing**
-   - Bug reporting and testing
-   - User experience feedback
-   - Performance testing
-
-4. **Community**
-   - Answering questions
-   - Sharing use cases
-   - Promoting the project
-
-### **Getting Started**
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-### **Development Guidelines**
-
-- Follow TypeScript best practices
-- Write comprehensive tests
-- Update documentation
-- Follow the existing code style
-- Ensure all tests pass
+- **Code Style**: Follow TypeScript and React best practices
+- **Testing**: Write tests for new features
+- **Documentation**: Update documentation for changes
+- **Commit Messages**: Use conventional commit messages
 
 ## 📄 License
 
@@ -511,31 +470,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **VeChain Foundation** for blockchain infrastructure
-- **React Community** for the amazing frontend framework
-- **NestJS Team** for the robust backend framework
-- **Open Source Contributors** for various libraries and tools
-- **Sustainability Community** for inspiration and feedback
+- **VeChain Foundation** - For providing the blockchain platform
+- **VeChain DAppKit Team** - For excellent developer tools
+- **OpenZeppelin** - For secure smart contract libraries
+- **React Community** - For the amazing React ecosystem
+- **Hackathon Participants** - For inspiration and feedback
 
-## 📚 Additional Documentation
+## 📞 Contact
 
-- **[Quick Start Guide](QUICK_START_GUIDE.md)** - Get up and running in 5 minutes
-- **[Technical Documentation](TECHNICAL_DOCUMENTATION.md)** - Comprehensive technical details
-- **[Business Plan](BUSINESS_PLAN.md)** - Business strategy and financial projections
-- **[API Integration](frontend/API_INTEGRATION.md)** - API documentation and examples
-- **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Deploy to VeChain Testnet
-- **[Blockchain Integration](BLOCKCHAIN_INTEGRATION.md)** - Smart contract details
-
-## 📞 Contact & Support
-
-- **Website**: [ecoledger.com](https://ecoledger.com)
-- **Email**: support@ecoledger.com
-- **Discord**: [EcoLedger Community](https://discord.gg/ecoledger)
-- **Twitter**: [@EcoLedgerApp](https://twitter.com/EcoLedgerApp)
-- **GitHub**: [github.com/ecoledger](https://github.com/ecoledger)
+- **Project**: EcoLedger
+- **Hackathon**: VeChain Hackathon 2024
+- **Status**: MVP - Production version coming soon
+- **Website**: [Coming Soon]
 
 ---
 
-**Built with ❤️ for a sustainable future**
+**Built with ❤️ for the VeChain Hackathon**
 
-*EcoLedger - Where blockchain meets sustainability* 🌱
+*This is an MVP developed for demonstration purposes. A complete, production-ready version will be developed after the hackathon with enhanced features, security, and scalability.*

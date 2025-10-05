@@ -4,8 +4,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, Link, Wallet } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { useBlockchain } from '@/hooks/useBlockchain';
+import { useWallet, useWalletModal } from '@vechain/dapp-kit-react';
 
 interface ProductFormData {
   name: string;
@@ -16,26 +18,29 @@ interface ProductFormData {
 
 interface RegisterProductFormProps {
   onSubmit: (data: ProductFormData) => void;
+  onBlockchainSubmit?: (data: ProductFormData) => void;
 }
 
-export function RegisterProductForm({ onSubmit }: RegisterProductFormProps) {
+export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterProductFormProps) {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     carbonFootprint: '',
     ecoScore: '',
     metadata: '',
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { open: openWalletModal } = useWalletModal();
+  const { isConnected, addProductToBlockchain, isLoading: blockchainLoading } = useBlockchain();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const validateForm = () => {
     if (!formData.name || !formData.carbonFootprint || !formData.ecoScore) {
       toast({
         title: "Missing information",
         description: "Please fill in all required fields",
         variant: "destructive",
       });
-      return;
+      return false;
     }
 
     const ecoScore = parseInt(formData.ecoScore);
@@ -45,16 +50,76 @@ export function RegisterProductForm({ onSubmit }: RegisterProductFormProps) {
         description: "EcoScore must be between 0 and 100",
         variant: "destructive",
       });
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
 
     onSubmit(formData);
     setFormData({ name: '', carbonFootprint: '', ecoScore: '', metadata: '' });
     
     toast({
       title: "Product registered!",
-      description: `${formData.name} has been added to the blockchain`,
+      description: `${formData.name} has been added to the database`,
     });
+  };
+
+  const handleBlockchainSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+
+    if (!isConnected) {
+      toast({
+        title: "Wallet Not Connected",
+        description: "Please connect your wallet to add products to the blockchain.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      // Convert form data to FrontendProduct format
+      const productData = {
+        id: Date.now().toString(), // Temporary ID
+        name: formData.name,
+        category: 'general', // Default category
+        description: formData.metadata || '',
+        ef: parseFloat(formData.carbonFootprint),
+        ecoScore: parseInt(formData.ecoScore),
+        carbonFootprint: parseFloat(formData.carbonFootprint)
+      };
+
+      const txHash = await addProductToBlockchain(productData);
+      
+      toast({
+        title: "Product Added to Blockchain!",
+        description: `Transaction hash: ${txHash.slice(0, 10)}...`,
+      });
+
+      // Call the blockchain submit callback if provided
+      if (onBlockchainSubmit) {
+        onBlockchainSubmit(formData);
+      }
+
+      setFormData({ name: '', carbonFootprint: '', ecoScore: '', metadata: '' });
+      
+    } catch (error) {
+      toast({
+        title: "Blockchain Error",
+        description: error instanceof Error ? error.message : "Failed to add product to blockchain",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -121,9 +186,45 @@ export function RegisterProductForm({ onSubmit }: RegisterProductFormProps) {
             />
           </div>
 
-          <Button type="submit" className="w-full">
-            Register Product
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={handleSubmit}
+              className="flex-1"
+            >
+              Register to Database
+            </Button>
+            <Button 
+              type="button" 
+              onClick={!isConnected ? openWalletModal : handleBlockchainSubmit}
+              disabled={isSubmitting || blockchainLoading}
+              className="flex-1"
+            >
+              {!isConnected ? (
+                <>
+                  <Wallet className="w-4 h-4 mr-2" />
+                  Connect Wallet First
+                </>
+              ) : isSubmitting || blockchainLoading ? (
+                <>
+                  <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                  Adding to Blockchain...
+                </>
+              ) : (
+                <>
+                  <Link className="w-4 h-4 mr-2" />
+                  Add to Blockchain
+                </>
+              )}
+            </Button>
+          </div>
+          
+          {!isConnected && (
+            <div className="text-center text-sm text-muted-foreground">
+              Connect your wallet to add products directly to the blockchain
+            </div>
+          )}
         </form>
       </CardContent>
     </Card>

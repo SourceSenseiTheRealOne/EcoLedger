@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  vechain-solo:
+    image: vechain/thor:latest
+    container_name: vechain-solo
+    ports:
+      - "8669:8669"
+    environment:
+      - THOR_LOGGER=4
+    command: ["--api-addr=0.0.0.0:8669", "--api-cors=*", "--genesis=genesis.json"]

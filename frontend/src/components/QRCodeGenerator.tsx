@@ -7,25 +7,27 @@ import { FrontendProduct } from '@/services/api';
 
 interface QRCodeGeneratorProps {
   product: FrontendProduct;
+  txHash?: string;
 }
 
-export const QRCodeGenerator = ({ product }: QRCodeGeneratorProps) => {
-  // Create a comprehensive product data object for the QR code
-  const productData = {
-    id: product.id,
-    name: product.name,
-    category: product.category,
-    ecoScore: product.ecoScore,
-    carbonFootprint: product.carbonFootprint,
-    description: product.description,
-    emissionFactor: product.ef,
-    bestCo2g: product.bestCo2g,
-    worstCo2g: product.worstCo2g,
-    timestamp: new Date().toISOString(),
-    platform: 'EcoLedger',
-  };
-
-  const qrData = JSON.stringify(productData, null, 2);
+export const QRCodeGenerator = ({ product, txHash }: QRCodeGeneratorProps) => {
+  // If we have a transaction hash, create a QR code that links to VeChain explorer
+  const qrData = txHash && txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched'
+    ? `https://explore-testnet.vechain.org/transactions/${txHash}`
+    : JSON.stringify({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        ecoScore: product.ecoScore,
+        carbonFootprint: product.carbonFootprint,
+        description: product.description,
+        emissionFactor: product.ef,
+        bestCo2g: product.bestCo2g,
+        worstCo2g: product.worstCo2g,
+        timestamp: new Date().toISOString(),
+        platform: 'EcoLedger',
+        txHash: txHash || 'not-on-blockchain'
+      }, null, 2);
 
   const handleDownloadQR = () => {
     // Create a canvas element to render the QR code
@@ -92,7 +94,10 @@ export const QRCodeGenerator = ({ product }: QRCodeGeneratorProps) => {
             QR Code for {product.name}
           </DialogTitle>
           <DialogDescription>
-            Scan this QR code to view product sustainability information
+            {txHash && txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched'
+              ? 'Scan this QR code to view the transaction on VeChain Explorer'
+              : 'Scan this QR code to view product sustainability information'
+            }
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
