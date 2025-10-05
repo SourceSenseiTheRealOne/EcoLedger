@@ -3,6 +3,22 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
+// Custom plugin to handle exports issue
+function exportsPolyfill() {
+  return {
+    name: 'exports-polyfill',
+    generateBundle(options, bundle) {
+      // Add exports polyfill to the main bundle
+      Object.keys(bundle).forEach(fileName => {
+        const chunk = bundle[fileName];
+        if (chunk.type === 'chunk' && chunk.isEntry) {
+          chunk.code = `(function() { if (typeof exports === 'undefined') { window.exports = {}; } if (typeof module === 'undefined') { window.module = {}; } })();\n${chunk.code}`;
+        }
+      });
+    }
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -11,6 +27,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
+    exportsPolyfill(),
     nodePolyfills({
       include: [
         'crypto', 
@@ -55,6 +72,8 @@ export default defineConfig(({ mode }) => ({
       "util": "util",
       "crypto": "crypto-browserify",
       "process": "process/browser",
+      // Fix VeChain SDK imports
+      "@vechain/ethers/utils/abi-coder": "@vechain/ethers/utils/abi-coder.js",
     },
   },
   define: {
@@ -62,6 +81,9 @@ export default defineConfig(({ mode }) => ({
     'process.env': {},
     'process.browser': true,
     'process.version': '"v16.0.0"',
+    'exports': '{}',
+    'module': '{}',
+    'require': 'undefined',
   },
   build: {
     rollupOptions: {
@@ -81,6 +103,8 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
       include: [/node_modules/],
       requireReturnsDefault: 'auto',
+      strictRequires: true,
+      ignore: ['conditional-runtime-dependency'],
       esmExternals: (id) => {
         // Don't externalize React and related packages
         if (id.includes('react') || id.includes('@radix-ui')) {
@@ -98,6 +122,8 @@ export default defineConfig(({ mode }) => ({
       '@vechain/connex', 
       '@vechain/sdk-core', 
       '@vechain/sdk-network',
+      '@vechain/ethers',
+      'thor-devkit',
       'buffer',
       'stream-browserify',
       'crypto-browserify',
