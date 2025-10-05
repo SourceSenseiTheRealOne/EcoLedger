@@ -4,41 +4,11 @@ import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
+export default defineConfig({
   plugins: [
     react(),
     nodePolyfills({
-      include: [
-        'crypto', 
-        'http', 
-        'https', 
-        'url', 
-        'util', 
-        'stream', 
-        'buffer', 
-        'process',
-        'events',
-        'os',
-        'path',
-        'fs',
-        'net',
-        'tls',
-        'child_process',
-        'readline',
-        'querystring',
-        'string_decoder',
-        'timers',
-        'assert',
-        'constants',
-        'domain',
-        'punycode',
-        'vm',
-        'zlib'
-      ],
+      include: ['crypto', 'buffer', 'process', 'stream', 'util'],
       globals: {
         Buffer: true,
         global: true,
@@ -49,54 +19,38 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      // Add specific aliases for problematic modules
-      "stream": "stream-browserify",
       "buffer": "buffer",
-      "util": "util",
       "crypto": "crypto-browserify",
+      "stream": "stream-browserify",
+      "util": "util",
       "process": "process/browser",
     },
   },
   define: {
     global: 'globalThis',
     'process.env': {},
-    'process.browser': true,
-    'process.version': '"v16.0.0"',
     'exports': '{}',
     'module': '{}',
-    'require': 'undefined',
-    'globalThis.exports': '{}',
-    'globalThis.module': '{}',
-    'globalThis.require': 'undefined',
   },
   build: {
+    target: 'esnext',
     rollupOptions: {
-      external: [],
+      external: [
+        '@vechain/connex',
+        '@vechain/sdk-core',
+        '@vechain/sdk-network',
+        '@vechain/dapp-kit-react',
+        'thor-devkit',
+        '@vechain/connex-framework',
+        '@walletconnect/core',
+        '@walletconnect/types',
+        'validator-ts'
+      ],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          blockchain: ['ethers', '@vechain/connex', '@vechain/sdk-core', '@vechain/sdk-network'],
         },
       },
     },
-    commonjsOptions: {
-      transformMixedEsModules: true,
-      include: [/node_modules/],
-      requireReturnsDefault: 'auto',
-    },
-    target: 'esnext',
   },
-  optimizeDeps: {
-    include: [
-      'ethers', 
-      '@vechain/connex', 
-      '@vechain/sdk-core', 
-      '@vechain/sdk-network',
-      'buffer',
-      'stream-browserify',
-      'crypto-browserify',
-      'util',
-      'process'
-    ],
-  },
-}));
+});
