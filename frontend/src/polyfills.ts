@@ -63,4 +63,33 @@ if (typeof window !== 'undefined' && typeof (window as any).global === 'undefine
   (window as any).global = globalThis;
 }
 
+// Polyfill for WebRTC and other browser APIs that might be missing
+if (typeof window !== 'undefined') {
+  // Ensure RTCPeerConnection is available (for wallet connections)
+  if (typeof (window as any).RTCPeerConnection === 'undefined') {
+    (window as any).RTCPeerConnection = class RTCPeerConnection {
+      constructor() {
+        console.warn('RTCPeerConnection not available in this environment');
+      }
+    };
+  }
+  
+  // Ensure WebSocket is available
+  if (typeof (window as any).WebSocket === 'undefined') {
+    (window as any).WebSocket = class WebSocket {
+      constructor() {
+        console.warn('WebSocket not available in this environment');
+      }
+    };
+  }
+  
+  // Ensure navigator.mediaDevices is available
+  if (typeof navigator !== 'undefined' && !navigator.mediaDevices) {
+    (navigator as any).mediaDevices = {
+      getUserMedia: () => Promise.reject(new Error('getUserMedia not available')),
+      enumerateDevices: () => Promise.resolve([]),
+    };
+  }
+}
+
 export {};

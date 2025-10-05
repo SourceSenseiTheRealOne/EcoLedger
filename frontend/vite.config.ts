@@ -29,7 +29,9 @@ export default defineConfig(({ mode }) => ({
         'zlib',
         'net',
         'tls',
-        'child_process'
+        'child_process',
+        'webrtc',
+        'ws'
       ],
       globals: {
         Buffer: true,

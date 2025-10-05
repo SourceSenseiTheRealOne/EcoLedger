@@ -1,23 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { useWallet, useWalletModal } from "@vechain/dapp-kit-react";
-import { Wallet, User } from "lucide-react";
+import { Wallet, User, AlertCircle } from "lucide-react";
 import { humanAddress } from "@/util/formatting";
+import { useState } from "react";
 
 export const DAppKitWalletButton = () => {
   const { account } = useWallet();
   const { open } = useWalletModal();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleConnect = async () => {
+    try {
+      setError(null);
+      await open();
+    } catch (err) {
+      console.error('Wallet connection error:', err);
+      setError('Failed to connect wallet. Please try again or use a different wallet.');
+    }
+  };
 
   if (!account) {
     return (
-      <Button
-        onClick={open}
-        variant="default"
-        size="sm"
-        className="gap-2"
-      >
-        <Wallet className="w-4 h-4" />
-        Connect Wallet
-      </Button>
+      <div className="flex flex-col items-end gap-1">
+        <Button
+          onClick={handleConnect}
+          variant="default"
+          size="sm"
+          className="gap-2"
+        >
+          <Wallet className="w-4 h-4" />
+          Connect Wallet
+        </Button>
+        {error && (
+          <div className="flex items-center gap-1 text-xs text-red-500">
+            <AlertCircle className="w-3 h-3" />
+            <span>{error}</span>
+          </div>
+        )}
+      </div>
     );
   }
 
