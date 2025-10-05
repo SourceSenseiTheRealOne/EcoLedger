@@ -9,7 +9,7 @@ describe("EcoLedger Contract", function () {
 
   beforeEach(async function () {
     [owner, wallet1, wallet2] = await ethers.getSigners();
-    
+
     const EcoLedger = await ethers.getContractFactory("EcoLedger");
     ecoLedger = await EcoLedger.deploy();
     await ecoLedger.waitForDeployment();

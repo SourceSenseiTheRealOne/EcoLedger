@@ -192,10 +192,10 @@ EcoLedger/
 ### Running the Application
 
 #### Frontend Development
-```bash
-cd frontend
-npm run dev
-```
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
 
 #### Smart Contract Development
