@@ -55,8 +55,6 @@ export default defineConfig(({ mode }) => ({
       "util": "util",
       "crypto": "crypto-browserify",
       "process": "process/browser",
-      // Fix VeChain SDK imports
-      "@vechain/ethers/utils/abi-coder": "@vechain/ethers/utils/abi-coder.js",
     },
   },
   define: {
@@ -64,9 +62,6 @@ export default defineConfig(({ mode }) => ({
     'process.env': {},
     'process.browser': true,
     'process.version': '"v16.0.0"',
-    'exports': '{}',
-    'module': '{}',
-    'require': 'undefined',
   },
   build: {
     rollupOptions: {
@@ -74,7 +69,7 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          blockchain: ['ethers'],
+          blockchain: ['ethers', '@vechain/connex', '@vechain/sdk-core', '@vechain/sdk-network'],
         },
         format: 'es',
         generatedCode: {
@@ -86,8 +81,13 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
       include: [/node_modules/],
       requireReturnsDefault: 'auto',
-      strictRequires: true,
-      ignore: ['conditional-runtime-dependency'],
+      esmExternals: (id) => {
+        // Don't externalize React and related packages
+        if (id.includes('react') || id.includes('@radix-ui')) {
+          return false;
+        }
+        return true;
+      },
     },
     target: 'esnext',
     minify: 'terser',
@@ -95,6 +95,9 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: [
       'ethers', 
+      '@vechain/connex', 
+      '@vechain/sdk-core', 
+      '@vechain/sdk-network',
       'buffer',
       'stream-browserify',
       'crypto-browserify',
