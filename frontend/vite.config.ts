@@ -71,12 +71,26 @@ export default defineConfig(({ mode }) => ({
           vendor: ['react', 'react-dom'],
           blockchain: ['ethers', '@vechain/connex', '@vechain/sdk-core', '@vechain/sdk-network'],
         },
+        format: 'es',
+        generatedCode: {
+          constBindings: true,
+        },
       },
     },
     commonjsOptions: {
       transformMixedEsModules: true,
       include: [/node_modules/],
+      requireReturnsDefault: 'auto',
+      esmExternals: (id) => {
+        // Don't externalize React and related packages
+        if (id.includes('react') || id.includes('@radix-ui')) {
+          return false;
+        }
+        return true;
+      },
     },
+    target: 'esnext',
+    minify: 'terser',
   },
   optimizeDeps: {
     include: [
