@@ -3,22 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
-// Custom plugin to handle exports issue
-function exportsPolyfill() {
-  return {
-    name: 'exports-polyfill',
-    generateBundle(options, bundle) {
-      // Add exports polyfill to the main bundle
-      Object.keys(bundle).forEach(fileName => {
-        const chunk = bundle[fileName];
-        if (chunk.type === 'chunk' && chunk.isEntry) {
-          chunk.code = `(function() { if (typeof exports === 'undefined') { window.exports = {}; } if (typeof module === 'undefined') { window.module = {}; } })();\n${chunk.code}`;
-        }
-      });
-    }
-  };
-}
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -27,7 +11,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    exportsPolyfill(),
     nodePolyfills({
       include: [
         'crypto', 
@@ -91,7 +74,7 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          blockchain: ['ethers', '@vechain/connex', '@vechain/sdk-core', '@vechain/sdk-network'],
+          blockchain: ['ethers'],
         },
         format: 'es',
         generatedCode: {
@@ -105,13 +88,6 @@ export default defineConfig(({ mode }) => ({
       requireReturnsDefault: 'auto',
       strictRequires: true,
       ignore: ['conditional-runtime-dependency'],
-      esmExternals: (id) => {
-        // Don't externalize React and related packages
-        if (id.includes('react') || id.includes('@radix-ui')) {
-          return false;
-        }
-        return true;
-      },
     },
     target: 'esnext',
     minify: 'terser',
@@ -119,11 +95,6 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: [
       'ethers', 
-      '@vechain/connex', 
-      '@vechain/sdk-core', 
-      '@vechain/sdk-network',
-      '@vechain/ethers',
-      'thor-devkit',
       'buffer',
       'stream-browserify',
       'crypto-browserify',
