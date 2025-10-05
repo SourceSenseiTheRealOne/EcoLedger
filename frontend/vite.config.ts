@@ -87,12 +87,24 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
       include: [/node_modules/],
       requireReturnsDefault: 'auto',
+      exclude: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        '@radix-ui/react-compose-refs',
+        '@radix-ui/react-context'
+      ],
     },
     target: 'esnext',
     minify: 'terser',
   },
   optimizeDeps: {
     include: [
+      'react',
+      'react-dom',
+      'react/jsx-runtime',
+      '@radix-ui/react-compose-refs',
+      '@radix-ui/react-context',
       'ethers', 
       '@vechain/connex', 
       '@vechain/sdk-core', 
