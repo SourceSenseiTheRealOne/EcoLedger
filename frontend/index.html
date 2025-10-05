@@ -20,25 +20,6 @@
 
   <body>
     <div id="root"></div>
-    <script>
-      // Polyfill for require function - must be loaded before any modules
-      if (typeof window !== 'undefined' && typeof window.require === 'undefined') {
-        window.require = function(id) {
-          console.warn('require(' + id + ') called in browser environment');
-          return {};
-        };
-      }
-      
-      // Polyfill for module.exports
-      if (typeof window !== 'undefined' && typeof window.module === 'undefined') {
-        window.module = { exports: {} };
-      }
-      
-      // Polyfill for exports
-      if (typeof window !== 'undefined' && typeof window.exports === 'undefined') {
-        window.exports = {};
-      }
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

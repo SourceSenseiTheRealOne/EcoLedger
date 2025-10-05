@@ -12,27 +12,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     nodePolyfills({
-      include: [
-        'crypto', 
-        'http', 
-        'https', 
-        'url', 
-        'util', 
-        'stream', 
-        'buffer', 
-        'process',
-        'os',
-        'path',
-        'fs',
-        'events',
-        'querystring',
-        'zlib',
-        'net',
-        'tls',
-        'child_process',
-        'webrtc',
-        'ws'
-      ],
+      include: ['crypto', 'http', 'https', 'url', 'util'],
       globals: {
         Buffer: true,
         global: true,
@@ -47,28 +27,5 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     global: 'globalThis',
-    'process.env': {},
-  },
-  build: {
-    rollupOptions: {
-      external: [],
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          blockchain: ['@vechain/dapp-kit-react', 'ethers'],
-        },
-      },
-    },
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
-  },
-  optimizeDeps: {
-    include: [
-      '@vechain/dapp-kit-react',
-      'ethers',
-      'react',
-      'react-dom',
-    ],
   },
 }));

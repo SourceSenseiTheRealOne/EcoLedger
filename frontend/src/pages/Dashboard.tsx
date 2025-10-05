@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { RegisterProductForm } from '@/components/RegisterProductForm';
 import { ProductSelector } from '@/components/ProductSelector';
+import { WalletConnection } from '@/components/WalletConnection';
 import { BlockchainProductCard } from '@/components/BlockchainProductCard';
 import { WelcomeModal } from '@/components/WelcomeModal';
 import { DAppKitWalletButton } from '@/components/DAppKitWalletButton';
-import { FallbackWalletButton } from '@/components/FallbackWalletButton';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LayoutGrid, PlusCircle, Database, Wallet, Link, HelpCircle, Leaf } from 'lucide-react';
@@ -250,10 +250,7 @@ export default function Dashboard() {
                   <HelpCircle className="w-4 h-4" />
                 </Button>
               )}
-              <div className="flex flex-col items-end gap-2">
-                <DAppKitWalletButton />
-                <FallbackWalletButton />
-              </div>
+              <DAppKitWalletButton />
             </div>
           </div>
         </div>

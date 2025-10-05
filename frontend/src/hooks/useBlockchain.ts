@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { vechainService, VeChainProduct } from '@/services/vechain-simple';
 import { FrontendProduct } from '@/services/api';
 import { vechainDAppKitService, BlockchainProduct } from '@/services/vechain-dappkit';
 import { useWallet, useWalletModal, useConnex } from '@vechain/dapp-kit-react';
@@ -134,7 +135,7 @@ export const useBlockchain = () => {
   }, [account, connex]);
 
   const getExplorerUrl = useCallback((txHash: string) => {
-    return vechainDAppKitService.getExplorerUrl(txHash);
+    return vechainService.getExplorerUrl(txHash);
   }, []);
 
 

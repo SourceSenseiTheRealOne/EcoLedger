@@ -11,20 +11,11 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <DAppKitProvider
-    usePersistence={false}
+    usePersistence
     requireCertificate={false}
     genesis="test"
     nodeUrl="https://testnet.vechain.org/"
     logLevel="ERROR"
-    walletConnectOptions={{
-      projectId: "ecoledger-vechain-hackathon",
-      metadata: {
-        name: "EcoLedger",
-        description: "Blockchain Sustainability Platform",
-        url: window.location.origin,
-        icons: [`${window.location.origin}/favicon.svg`]
-      }
-    }}
   >
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
