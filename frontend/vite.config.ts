@@ -3,24 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
-// Custom plugin to handle exports issue
-const fixExportsPlugin = () => ({
-  name: 'fix-exports',
-  generateBundle(options, bundle) {
-    Object.keys(bundle).forEach(fileName => {
-      const file = bundle[fileName];
-      if (file.type === 'chunk' && file.code) {
-        // Replace problematic exports references
-        file.code = file.code
-          .replace(/typeof exports !== 'undefined' \? exports : \{\}/g, '{}')
-          .replace(/typeof module !== 'undefined' \? module : \{\}/g, '{}')
-          .replace(/exports\./g, '{}')
-          .replace(/module\.exports/g, '{}');
-      }
-    });
-  }
-});
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -29,7 +11,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    fixExportsPlugin(),
     nodePolyfills({
       include: [
         'crypto', 
@@ -106,9 +87,6 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
       include: [/node_modules/],
       requireReturnsDefault: 'auto',
-      strictRequires: false,
-      ignore: ['conditional-runtime-dependency'],
-      esmExternals: false,
     },
     target: 'esnext',
     minify: 'terser',
