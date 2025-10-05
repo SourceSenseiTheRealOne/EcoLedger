@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     nodePolyfills({
-      include: ['crypto', 'http', 'https', 'url', 'util'],
+      include: ['crypto', 'http', 'https', 'url', 'util', 'stream', 'buffer', 'fs', 'path', 'os'],
       globals: {
         Buffer: true,
         global: true,
@@ -27,5 +27,30 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     global: 'globalThis',
+    'process.env': {},
+    'process.env.NODE_ENV': JSON.stringify(mode),
+    'process.env.NODE_DEBUG': 'false',
+  },
+  build: {
+    target: 'esnext',
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          blockchain: ['@vechain/dapp-kit-react', '@vechain/connex'],
+        },
+      },
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
+  },
+  optimizeDeps: {
+    include: [
+      '@vechain/dapp-kit-react', 
+      '@vechain/connex'
+    ],
   },
 }));
