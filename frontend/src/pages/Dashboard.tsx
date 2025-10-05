@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { ProductCard } from '@/components/ProductCard';
 import { RegisterProductForm } from '@/components/RegisterProductForm';
 import { ProductSelector } from '@/components/ProductSelector';
-import { WalletConnection } from '@/components/WalletConnection';
 import { BlockchainProductCard } from '@/components/BlockchainProductCard';
 import { WelcomeModal } from '@/components/WelcomeModal';
 import { DAppKitWalletButton } from '@/components/DAppKitWalletButton';

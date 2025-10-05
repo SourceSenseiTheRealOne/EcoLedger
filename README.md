@@ -167,13 +167,13 @@ EcoLedger/
 - **Node.js** (v18 or higher)
 - **npm** or **yarn**
 - **Git**
-- **VeChain Wallet** (VeWorld or Sync2)
+- **VeChain Wallet** (Sync2)
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/ecoledger.git
+   git clone https://github.com/your-username/EcoLedger.git
    cd ecoledger
    ```
 

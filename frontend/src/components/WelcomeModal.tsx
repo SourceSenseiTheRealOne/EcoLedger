@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Wallet, Database, Link, QrCode, ArrowRight } from 'lucide-react';
-import { WalletConnection } from './WalletConnection';
 import { DAppKitWalletButton } from './DAppKitWalletButton';
 import { useWallet } from '@vechain/dapp-kit-react';
 

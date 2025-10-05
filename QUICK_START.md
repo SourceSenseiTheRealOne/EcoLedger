@@ -6,7 +6,7 @@
 
 ### 1. Clone and Install
 ```bash
-git clone https://github.com/your-username/ecoledger.git
+git clone https://github.com/your-username/EcoLedger.git
 cd frontend
 npm install
 ```
