@@ -4,11 +4,15 @@ import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  server: {
+    host: "::",
+    port: 8080,
+  },
   plugins: [
     react(),
     nodePolyfills({
-      include: ['crypto', 'buffer', 'process', 'stream', 'util'],
+      include: ['crypto', 'http', 'https', 'url', 'util'],
       globals: {
         Buffer: true,
         global: true,
@@ -19,38 +23,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "buffer": "buffer",
-      "crypto": "crypto-browserify",
-      "stream": "stream-browserify",
-      "util": "util",
-      "process": "process/browser",
     },
   },
   define: {
     global: 'globalThis',
-    'process.env': {},
-    'exports': '{}',
-    'module': '{}',
   },
-  build: {
-    target: 'esnext',
-    rollupOptions: {
-      external: [
-        '@vechain/connex',
-        '@vechain/sdk-core',
-        '@vechain/sdk-network',
-        '@vechain/dapp-kit-react',
-        'thor-devkit',
-        '@vechain/connex-framework',
-        '@walletconnect/core',
-        '@walletconnect/types',
-        'validator-ts'
-      ],
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-        },
-      },
-    },
-  },
-});
+}));
