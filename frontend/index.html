@@ -5,6 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>EcoLedger - Blockchain Sustainability Platform</title>
+    
+    <!-- Process polyfill for browser compatibility -->
+    <script>
+      if (typeof global === 'undefined') {
+        window.global = window;
+      }
+      if (typeof process === 'undefined') {
+        window.process = {
+          env: {},
+          browser: true,
+          version: '',
+          versions: {},
+          platform: 'browser',
+          nextTick: function(fn) { setTimeout(fn, 0); },
+          cwd: function() { return '/'; },
+          chdir: function() {},
+          umask: function() { return 0; },
+          hrtime: function() { return [0, 0]; },
+          uptime: function() { return 0; },
+          memoryUsage: function() { return {}; },
+          binding: function() { return {}; },
+          dlopen: function() {},
+          send: function() {},
+          disconnect: function() {},
+          exit: function() {},
+          kill: function() {},
+          abort: function() {},
+          on: function() {},
+          addListener: function() {},
+          once: function() {},
+          removeListener: function() {},
+          removeAllListeners: function() {},
+          setMaxListeners: function() {},
+          getMaxListeners: function() { return 0; },
+          listeners: function() { return []; },
+          emit: function() { return false; },
+          listenerCount: function() { return 0; },
+          prependListener: function() {},
+          prependOnceListener: function() {},
+          eventNames: function() { return []; }
+        };
+      }
+    </script>
     <meta name="description" content="Track and verify product sustainability with blockchain-powered eco-verification. Monitor EcoScores and carbon footprints for sustainable products." />
     <meta name="author" content="EcoLedger" />
 
