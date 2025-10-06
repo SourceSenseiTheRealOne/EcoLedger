@@ -3,6 +3,7 @@ import { vechainService, VeChainProduct } from '@/services/vechain-simple';
 import { FrontendProduct } from '@/services/api';
 import { vechainDAppKitService, BlockchainProduct } from '@/services/vechain-dappkit';
 import { useWallet, useWalletModal, useConnex } from '@vechain/dapp-kit-react';
+import { generateUniqueProductId } from '../util/idGeneration';
 
 export const useBlockchain = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -68,6 +69,7 @@ export const useBlockchain = () => {
     setError('');
   }, []);
 
+
   const addProductToBlockchain = useCallback(async (product: FrontendProduct) => {
     if (!account) {
       throw new Error('Wallet not connected');
@@ -87,7 +89,7 @@ export const useBlockchain = () => {
       const co2FootprintGrams = Math.floor(productWeightKg * product.ef * 1000);
       
       const productData = {
-        productId: product.id || Date.now().toString(), // Use existing ID or generate one
+        productId: product.id || generateUniqueProductId(account), // Use existing ID or generate unique one
         name: product.name,
         category: product.category,
         co2Footprint: co2FootprintGrams // CO2 footprint in grams

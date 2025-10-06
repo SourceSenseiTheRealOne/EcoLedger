@@ -8,6 +8,7 @@ import { PlusCircle, Link, Wallet } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { useBlockchain } from '@/hooks/useBlockchain';
 import { useWallet, useWalletModal } from '@vechain/dapp-kit-react';
+import { generateUniqueProductId } from '../util/idGeneration';
 
 interface ProductFormData {
   name: string;
@@ -69,6 +70,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
     });
   };
 
+
   const handleBlockchainSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -88,7 +90,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
     try {
       // Convert form data to FrontendProduct format
       const productData = {
-        id: Date.now().toString(), // Temporary ID
+        id: generateUniqueProductId(), // Generate unique ID (wallet address will be added in useBlockchain)
         name: formData.name,
         category: 'general', // Default category
         description: formData.metadata || '',

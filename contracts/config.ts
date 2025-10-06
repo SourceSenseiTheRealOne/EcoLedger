@@ -13,11 +13,11 @@ export const CONTRACT_CONFIG = {
     explorerUrl: 'https://explore.vechain.org/',
   },
   // Local development (when using VeChain Solo)
-  SOLO: {
-    chainId: 818,
-    rpcUrl: 'http://localhost:8669',
-    explorerUrl: 'http://localhost:8669',
-  },
+  // SOLO: {
+  //   chainId: 818,
+  //   rpcUrl: 'http://localhost:8669',
+  //   explorerUrl: 'http://localhost:8669',
+  // },
 };
 
 // Contract ABI (this will be updated after deployment)

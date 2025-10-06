@@ -11,7 +11,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LayoutGrid, PlusCircle, Database, Wallet, Link, HelpCircle, Leaf } from 'lucide-react';
 import { FrontendProduct } from '@/services/api';
 import { useBlockchain } from '@/hooks/useBlockchain';
-// Removed useBlockchainProducts - now fetching directly from blockchain
 import { useToast } from '@/hooks/use-toast';
 import { useWallet, useWalletModal } from '@vechain/dapp-kit-react';
 
@@ -50,12 +49,12 @@ export default function Dashboard() {
         const products = await getUserProductsFromBlockchain();
         console.log('Fetched products from blockchain:', products.length);
         
-            // Convert service BlockchainProduct to Dashboard BlockchainProduct
+
             const convertedProducts: BlockchainProduct[] = products.map(product => ({
               id: product.productId,
               name: product.name,
               category: product.category,
-              ecoScore: 85, // Default eco score since it's not in blockchain data
+              ecoScore: 85, 
               carbonFootprint: product.co2Footprint / 1000, // Convert grams to kg
               ef: product.co2Footprint / 1000, // Convert grams to kg
               bestCo2g: product.co2Footprint * 0.8, // Estimate best case
@@ -79,13 +78,13 @@ export default function Dashboard() {
 
   
   // Debug wallet connection state
-  console.log('Wallet Debug:', {
-    dappKitConnected: !!walletAddress,
-    dappKitAccount: walletAddress,
-    blockchainConnected,
-    blockchainWalletAddress,
-    blockchainProductsCount: blockchainProducts.length
-  });
+  // console.log('Wallet Debug:', {
+  //   dappKitConnected: !!walletAddress,
+  //   dappKitAccount: walletAddress,
+  //   blockchainConnected,
+  //   blockchainWalletAddress,
+  //   blockchainProductsCount: blockchainProducts.length
+  // });
 
   const handleProductSelect = (product: FrontendProduct) => {
     setSelectedProducts(prev => [...prev, product]);
@@ -105,7 +104,7 @@ export default function Dashboard() {
       return;
     }
 
-    console.log('Dashboard - Starting blockchain transaction for product:', product);
+    // console.log('Dashboard - Starting blockchain transaction for product:', product);
 
     try {
       const txHash = await addProductToBlockchain(product);
@@ -132,7 +131,7 @@ export default function Dashboard() {
           // Refresh blockchain products from the blockchain
           await fetchBlockchainProducts();
           
-          console.log('Dashboard - Product successfully added to blockchain');
+          // console.log('Dashboard - Product successfully added to blockchain');
       
     } catch (error) {
       console.error('Dashboard - Error adding product to blockchain:', error);
