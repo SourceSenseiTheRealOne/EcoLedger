@@ -64,8 +64,8 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
     setFormData({ name: '', carbonFootprint: '', ecoScore: '', metadata: '' });
     
     toast({
-      title: "Product registered!",
-      description: `${formData.name} has been added to the database`,
+      title: "Demo only — not saved",
+      description: `${formData.name} was not saved; database registration is not implemented.`,
     });
   };
 
@@ -100,8 +100,8 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
       const txHash = await addProductToBlockchain(productData);
       
       toast({
-        title: "Product Added to Blockchain!",
-        description: `Transaction hash: ${txHash.slice(0, 10)}...`,
+        title: "Transaction ID returned — unconfirmed",
+        description: `Receipt not checked: ${txHash.slice(0, 10)}...`,
       });
 
       // Call the blockchain submit callback if provided
@@ -127,10 +127,10 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <PlusCircle className="w-5 h-5" />
-          Register New Product
+          Self-reported Product Form
         </CardTitle>
         <CardDescription>
-          Add a new sustainable product to the EcoLedger blockchain
+          Self-reported inputs only. Demo submit does not save; testnet submit does not confirm a receipt.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -148,7 +148,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="carbonFootprint">Carbon Footprint (kg CO₂) *</Label>
+              <Label htmlFor="carbonFootprint">Claimed CO₂ (kg, assumes 1 kg product) *</Label>
               <Input
                 id="carbonFootprint"
                 type="number"
@@ -161,7 +161,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="ecoScore">EcoScore (0-100) *</Label>
+              <Label htmlFor="ecoScore">Illustrative score (0-100, not stored on chain) *</Label>
               <Input
                 id="ecoScore"
                 type="number"
@@ -176,10 +176,10 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="metadata">Additional Information</Label>
+            <Label htmlFor="metadata">Self-reported notes (not stored on chain)</Label>
             <Textarea
               id="metadata"
-              placeholder="e.g., Made from 100% organic cotton, Fair Trade certified..."
+              placeholder="Describe the claim and its source; this prototype does not verify it."
               value={formData.metadata}
               onChange={(e) => setFormData({ ...formData, metadata: e.target.value })}
               rows={3}
@@ -193,7 +193,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
               onClick={handleSubmit}
               className="flex-1"
             >
-              Register to Database
+              Demo only (not saved)
             </Button>
             <Button 
               type="button" 
@@ -209,12 +209,12 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
               ) : isSubmitting || blockchainLoading ? (
                 <>
                   <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-background border-t-transparent" />
-                  Adding to Blockchain...
+                  Requesting transaction...
                 </>
               ) : (
                 <>
                   <Link className="w-4 h-4 mr-2" />
-                  Add to Blockchain
+                  Submit to Testnet
                 </>
               )}
             </Button>
@@ -222,7 +222,7 @@ export function RegisterProductForm({ onSubmit, onBlockchainSubmit }: RegisterPr
           
           {!isConnected && (
             <div className="text-center text-sm text-muted-foreground">
-              Connect your wallet to add products directly to the blockchain
+              Testnet signing is real; records are owner-mutable and receipt confirmation is not implemented.
             </div>
           )}
         </form>

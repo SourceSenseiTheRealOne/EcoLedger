@@ -42,7 +42,7 @@ export function ProductCard({
             <CardTitle className="text-xl mb-2">{name}</CardTitle>
             <Badge className={getEcoScoreColor(ecoScore)}>
               <Leaf className="w-3 h-3 mr-1" />
-              {getEcoScoreLabel(ecoScore)} ({ecoScore}/100)
+              Illustrative score: {getEcoScoreLabel(ecoScore)} ({ecoScore}/100)
             </Badge>
           </div>
           {onEdit && (
@@ -55,8 +55,8 @@ export function ProductCard({
       
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
-          <span className="text-sm font-medium text-muted-foreground">Carbon Footprint</span>
-          <span className="text-lg font-bold">{carbonFootprint} kg CO₂</span>
+          <span className="text-sm font-medium text-muted-foreground">Illustrative emission factor</span>
+          <span className="text-lg font-bold">{carbonFootprint} kg CO₂/kg</span>
         </div>
 
         {metadata && (
@@ -79,7 +79,7 @@ export function ProductCard({
         </div>
         
         <p className="text-xs text-center text-muted-foreground">
-          Scan to verify product authenticity
+          Scan for local data, not proof of authenticity
         </p>
       </CardContent>
     </Card>

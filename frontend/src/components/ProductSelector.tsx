@@ -58,10 +58,10 @@ export const ProductSelector = ({ onProductSelect, selectedProductIds }: Product
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Plus className="w-5 h-5" />
-          Add Product to Registry
+          Select an Illustrative Product
         </CardTitle>
         <CardDescription>
-          Select a product from the database to add to your registry
+          Bundled illustrative catalog; selections stay in memory, not a database.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -96,13 +96,13 @@ export const ProductSelector = ({ onProductSelect, selectedProductIds }: Product
         {availableProducts.length === 0 && selectedProductIds.length > 0 && (
           <div className="text-center text-muted-foreground py-4">
             <Leaf className="w-8 h-8 mx-auto mb-2 opacity-50" />
-            <p>All available products have been added to your registry!</p>
+            <p>All catalog products are selected for this session.</p>
           </div>
         )}
         
         {products && products.length === 0 && (
           <div className="text-center text-muted-foreground py-4">
-            <p>No products available in the database.</p>
+            <p>No products available in the bundled catalog.</p>
           </div>
         )}
       </CardContent>

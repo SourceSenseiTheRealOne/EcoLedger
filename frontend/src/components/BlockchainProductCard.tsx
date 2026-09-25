@@ -57,11 +57,11 @@ export function BlockchainProductCard({
             <CardTitle className="text-xl mb-2">{name}</CardTitle>
             <div className="flex items-center gap-2 mb-2">
               <Badge className={getEcoScoreColor(ecoScore)}>
-                {getEcoScoreLabel(ecoScore)} ({ecoScore}/100)
+                Illustrative score (fixed): {getEcoScoreLabel(ecoScore)} ({ecoScore}/100)
               </Badge>
               <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                 <Link className="w-3 h-3 mr-1" />
-                On Chain
+                Testnet record
               </Badge>
             </div>
           </div>
@@ -70,14 +70,14 @@ export function BlockchainProductCard({
       
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
-          <span className="text-sm font-medium text-muted-foreground">Carbon Footprint</span>
+          <span className="text-sm font-medium text-muted-foreground">Self-reported CO₂</span>
           <span className="text-lg font-bold">{carbonFootprint} kg CO₂</span>
         </div>
 
         {/* Transaction Hash Section */}
         <div className="p-3 rounded-lg bg-green-50 border border-green-200">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-green-800">Transaction Hash</span>
+            <span className="text-sm font-medium text-green-800">Stored transaction reference</span>
             <Button
               variant="ghost"
               size="sm"
@@ -102,7 +102,7 @@ export function BlockchainProductCard({
             </Button>
             {txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched' ? (
               <div className="text-xs text-green-600 bg-green-50 p-2 rounded border border-green-200">
-                <strong>Live Transaction:</strong> This is a real VeChain testnet transaction. Click to view in explorer.
+                <strong>Unverified reference:</strong> Owner-supplied text, not a checked receipt. Explorer lookup may fail.
               </div>
             ) : (
               <div className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
@@ -143,8 +143,8 @@ export function BlockchainProductCard({
         
         <p className="text-xs text-center text-muted-foreground">
           {txHash !== 'unknown-tx' && txHash !== 'blockchain-fetched' 
-            ? 'Scan to view transaction on VeChain Explorer'
-            : 'Scan to view product details'
+            ? 'Scan for explorer lookup, not sustainability verification'
+            : 'Scan for self-reported product details'
           }
         </p>
       </CardContent>

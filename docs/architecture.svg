@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="800" viewBox="0 0 1120 800" role="img" aria-labelledby="title description">
+  <title id="title">EcoLedger — source architecture and truth boundaries</title>
+  <desc id="description">The React dashboard reads a bundled catalog, not the standalone NestJS API. Mounted DAppKit signing code targets a real VeChain testnet registry, but receipt confirmation and the end-to-end wallet lifecycle are unverified. Environmental claims are self-reported and owner-mutable. The main build is blank in a browser.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="boundaryArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/>
+    </marker>
+    <style>
+      text { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; fill: #e2e8f0; }
+      .title { font-size: 28px; font-weight: 700; }
+      .heading { font-size: 21px; font-weight: 650; }
+      .body { font-size: 17px; }
+      .small { font-size: 15px; fill: #cbd5e1; }
+      .cyan { fill: #67e8f9; }
+      .amber { fill: #fde68a; }
+    </style>
+  </defs>
+  <rect width="1120" height="800" rx="16" fill="#020617"/>
+  <rect width="1120" height="800" rx="16" fill="url(#grid)"/>
+  <text x="40" y="51" class="title">EcoLedger / source architecture</text>
+  <text x="40" y="81" class="body">Sustainability Record Prototype · self-reported assertions, not certification</text>
+
+  <rect x="40" y="108" width="1040" height="66" rx="8" fill="#2a1c12" stroke="#fbbf24"/>
+  <text x="58" y="135" class="body amber">Runtime boundary: main builds, but the browser is blank — “require is not defined”.</text>
+  <text x="58" y="159" class="small">Netlify renders different assets; exact deployed frontend revision is unverified. This is not a live-flow screenshot.</text>
+
+  <!-- Source relationships, not a claim of an exercised wallet journey. -->
+  <path d="M 345 267 H 415" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 720 267 H 785" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#boundaryArrow)"/>
+  <path d="M 935 360 V 419" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#boundaryArrow)"/>
+
+  <rect x="40" y="212" width="305" height="182" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="60" y="246" class="heading cyan">Bundled local catalog</text>
+  <text x="60" y="277" class="body">local-api.ts → api.ts</text>
+  <text x="60" y="305" class="body">16 illustrative products</text>
+  <text x="60" y="333" class="body">Emission factors + heuristic score</text>
+  <text x="60" y="369" class="small">No Nest HTTP request or database</text>
+
+  <rect x="415" y="212" width="305" height="182" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="435" y="246" class="heading cyan">React dashboard</text>
+  <text x="435" y="277" class="body">useProducts / ProductSelector</text>
+  <text x="435" y="305" class="body">Selection: in-memory state</text>
+  <text x="435" y="333" class="body">Demo form: no-op submit</text>
+  <text x="435" y="369" class="small">QR: local JSON or stored reference</text>
+
+  <rect x="785" y="212" width="295" height="148" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="805" y="246" class="heading amber">DAppKit signing code</text>
+  <text x="805" y="277" class="body">useBlockchain → service</text>
+  <text x="805" y="305" class="body">Real wallet-signature request</text>
+  <text x="805" y="337" class="small">Returned ID ≠ confirmed receipt</text>
+
+  <rect x="785" y="419" width="295" height="183" rx="10" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="805" y="453" class="heading">VeChain testnet registry</text>
+  <text x="805" y="484" class="body">Executable presence verified</text>
+  <text x="805" y="512" class="body">Caller owns the record</text>
+  <text x="805" y="540" class="body">CO₂ + reference are mutable</text>
+  <text x="805" y="577" class="small">No independent environmental verifier</text>
+
+  <rect x="40" y="439" width="680" height="163" rx="10" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+  <text x="60" y="474" class="heading">Standalone NestJS API — disconnected from mounted catalog</text>
+  <text x="60" y="508" class="body">Products + CO₂ controllers → in-memory arrays / calculation helpers</text>
+  <text x="60" y="538" class="body">No durable product database; known route and input-validation defects</text>
+  <text x="60" y="578" class="small">No frontend-to-API arrow: these are separate implementations, not an integrated flow.</text>
+
+  <rect x="40" y="635" width="1040" height="70" rx="8" fill="#281522" stroke="#fb7185"/>
+  <text x="60" y="663" class="body">Truth boundary: chain history records assertions, not verified sustainability or carbon saved.</text>
+  <text x="60" y="689" class="small">Catalog factors are not product footprints. Retrieved records display a hardcoded score of 85. QR links are not certificates.</text>
+
+  <path d="M 40 741 H 86" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="99" y="747" class="small">Catalog dependency in source</text>
+  <path d="M 390 741 H 436" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#boundaryArrow)"/>
+  <text x="449" y="747" class="small">Signing path exists; end-to-end wallet lifecycle unverified</text>
+  <text x="40" y="777" class="small">Scope: mounted source paths + prior read-only chain evidence. No wallet connection or transaction was used to verify this presentation.</text>
+</svg>
