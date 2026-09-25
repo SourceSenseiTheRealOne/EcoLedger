@@ -116,8 +116,8 @@ export default function Dashboard() {
       }
       
           toast({
-            title: "Product Added to Blockchain",
-            description: `Transaction hash: ${txHash.slice(0, 10)}...`,
+            title: "Transaction ID returned — unconfirmed",
+            description: `Receipt not checked: ${txHash.slice(0, 10)}...`,
           });
 
           // Store the transaction hash for this product
@@ -218,7 +218,7 @@ export default function Dashboard() {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   EcoLedger
                 </h1>
-                <p className="text-xs text-muted-foreground hidden sm:block">Blockchain Sustainability Platform</p>
+                <p className="text-xs text-muted-foreground hidden sm:block">Sustainability Record Prototype</p>
               </div>
             </div>
             
@@ -266,12 +266,12 @@ export default function Dashboard() {
             <p className="text-3xl font-bold">{totalProducts}</p>
           </div>
           <div className="p-6 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
-            <p className="text-sm text-muted-foreground mb-1">Avg EcoScore</p>
+            <p className="text-sm text-muted-foreground mb-1">Illustrative average score</p>
             <p className="text-3xl font-bold text-success">{avgEcoScore}/100</p>
           </div>
           <div className="p-6 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
-            <p className="text-sm text-muted-foreground mb-1">Carbon Tracked</p>
-            <p className="text-3xl font-bold">{totalCarbonSaved} kg CO₂</p>
+            <p className="text-sm text-muted-foreground mb-1">Illustrative total (units vary by tab)</p>
+            <p className="text-3xl font-bold">{totalCarbonSaved} (unvalidated)</p>
           </div>
         </div>
 
@@ -288,7 +288,7 @@ export default function Dashboard() {
             </TabsTrigger>
             <TabsTrigger value="add" className="gap-2">
               <Database className="w-4 h-4" />
-              Add from DB
+              Catalog
             </TabsTrigger>
             <TabsTrigger value="wallet" className="gap-2">
               <Wallet className="w-4 h-4" />
@@ -302,7 +302,7 @@ export default function Dashboard() {
 
           <TabsContent value="products" className="space-y-4">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-semibold">Product Registry</h2>
+              <h2 className="text-2xl font-semibold">Illustrative Product Selection</h2>
               {selectedProducts.length > 0 && (
                 <Button 
                   variant="outline" 
@@ -319,12 +319,12 @@ export default function Dashboard() {
                 <Database className="w-16 h-16 mx-auto mb-4 text-muted-foreground/50" />
                 <h3 className="text-lg font-medium mb-2">No products selected</h3>
                 <p className="text-muted-foreground mb-4">
-                  Add products from the database or register new ones to get started.
+                  Select illustrative products from the Catalog tab. Selections are not saved.
                 </p>
                 <div className="flex gap-2 justify-center">
                   <Button onClick={() => (document.querySelector('[value="add"]') as HTMLButtonElement)?.click()}>
                     <Database className="w-4 h-4 mr-2" />
-                    Add from Database
+                    Open Catalog
                   </Button>
                   <Button variant="outline" onClick={() => (document.querySelector('[value="register"]') as HTMLButtonElement)?.click()}>
                     <PlusCircle className="w-4 h-4 mr-2" />
@@ -392,14 +392,14 @@ export default function Dashboard() {
                   <span className="text-xs font-medium text-green-600">✓</span>
                 </div>
                 <div>
-                  <h4 className="font-medium text-green-800 mb-1">Live Blockchain Integration</h4>
+                  <h4 className="font-medium text-green-800 mb-1">Testnet Records — Not Certification</h4>
                   <p className="text-sm text-green-700 mb-2">
-                    Products are fetched directly from the VeChain testnet blockchain. All data is real and 
-                    synchronized across all devices. Transaction hashes are live and can be viewed in the VeChain explorer.
+                    Self-reported records are owner-mutable, not independently verified sustainability.
+                    Scores here are hardcoded to 85; transaction references are not checked receipts.
                   </p>
                   <div className="text-xs text-green-600">
-                    <strong>Real blockchain data:</strong> Live transaction hashes, real wallet connections, 
-                    and actual blockchain interactions on VeChain testnet.
+                    <strong>Prototype boundary:</strong> Real VeChain testnet signing code exists;
+                    receipt confirmation and the end-to-end wallet lifecycle are unverified.
                   </div>
                 </div>
               </div>

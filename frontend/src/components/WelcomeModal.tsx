@@ -22,28 +22,28 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
     {
       id: 'welcome',
       title: 'Welcome to EcoLedger',
-      description: 'Your blockchain-powered sustainability platform',
+      description: 'Self-reported records, not verified sustainability',
       icon: <CheckCircle className="w-8 h-8 text-green-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            EcoLedger helps you track product sustainability and store information on the VeChain blockchain 
-            for complete transparency and verification.
+            EcoLedger is a sustainability record prototype with an illustrative local catalog
+            and a VeChain testnet registry. It does not certify environmental claims.
           </p>
           <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
             <p className="text-sm text-blue-800">
-              <strong>⛓️ Live Blockchain:</strong> This application is connected to VeChain testnet. 
-              All transactions are real and stored permanently on the blockchain for transparency and verification.
+              <strong>⛓️ Testnet prototype:</strong> Signing code is real, but the wallet lifecycle is unverified.
+              Receipt confirmation is not implemented. Records can be changed by their owner.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-3 rounded-lg bg-green-50 border border-green-200">
               <h4 className="font-medium text-green-800">🌱 Sustainability</h4>
-              <p className="text-sm text-green-600">Track carbon footprints and eco scores</p>
+              <p className="text-sm text-green-600">Illustrative factors and unvalidated scores</p>
             </div>
             <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
               <h4 className="font-medium text-blue-800">⛓️ Blockchain</h4>
-              <p className="text-sm text-blue-600">Store data on VeChain for transparency</p>
+              <p className="text-sm text-blue-600">Owner-mutable assertions on testnet</p>
             </div>
           </div>
         </div>
@@ -75,19 +75,19 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
     {
       id: 'products',
       title: 'Step 2: Select Products',
-      description: 'Choose products from our sustainability database',
+      description: 'Choose products from the bundled illustrative catalog',
       icon: <Database className="w-8 h-8 text-green-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            Browse our database of products with real carbon footprint data and eco scores.
+            Browse illustrative emission factors and heuristic scores. Selections stay in memory, not a database.
           </p>
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
               <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
                 <span className="text-xs font-medium text-green-600">1</span>
               </div>
-              <span className="text-sm">Go to the <strong>Add from DB</strong> tab</span>
+              <span className="text-sm">Go to the <strong>Catalog</strong> tab</span>
             </div>
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
               <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
@@ -99,13 +99,13 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
               <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
                 <span className="text-xs font-medium text-green-600">3</span>
               </div>
-              <span className="text-sm">Click <strong>Add</strong> to add to your registry</span>
+              <span className="text-sm">Click <strong>Add</strong> to select for this session</span>
             </div>
           </div>
           <div className="p-3 rounded-lg bg-green-50 border border-green-200">
             <p className="text-sm text-green-800">
-              <strong>💡 Tip:</strong> Products have different eco scores based on their carbon footprint. 
-              Lower carbon footprint = higher eco score!
+              <strong>💡 Score limits:</strong> Catalog scores use an illustrative factor heuristic.
+              Retrieved testnet records show a hardcoded score of 85, not a measured rating.
             </p>
           </div>
         </div>
@@ -114,12 +114,12 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
     {
       id: 'blockchain',
       title: 'Step 3: Add to Blockchain',
-      description: 'Store products on VeChain for transparency',
+      description: 'Request a testnet transaction for a self-reported record',
       icon: <Link className="w-8 h-8 text-purple-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            Add your selected products to the VeChain blockchain for permanent, transparent storage.
+            Testnet submission requests a real wallet signature. A returned transaction ID is not a checked receipt.
           </p>
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
@@ -138,7 +138,7 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
               <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
                 <span className="text-xs font-medium text-purple-600">3</span>
               </div>
-              <span className="text-sm">Wait for transaction confirmation</span>
+              <span className="text-sm">Receipt confirmation is not implemented</span>
             </div>
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
               <div className="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center">
@@ -149,8 +149,8 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
           </div>
           <div className="p-3 rounded-lg bg-purple-50 border border-purple-200">
             <p className="text-sm text-purple-800">
-              <strong>🔗 Blockchain Benefits:</strong> Your products are stored permanently on VeChain, 
-              creating an immutable record of sustainability data.
+              <strong>🔗 Record limits:</strong> Owners can update claimed CO₂ and stored transaction references.
+              Transaction history does not prove that an environmental assertion is true.
             </p>
           </div>
         </div>
@@ -158,13 +158,13 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
     },
     {
       id: 'verification',
-      title: 'Step 4: View & Verify Products',
+      title: 'Step 4: Inspect Record References',
       description: 'Access your blockchain products with automatic QR codes',
       icon: <QrCode className="w-8 h-8 text-orange-500" />,
       content: (
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            View your blockchain products with automatically generated QR codes that contain all product information and transaction details.
+            QR codes contain local product JSON or an explorer link built from a stored reference, not a certificate.
           </p>
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
@@ -183,19 +183,19 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
               <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center">
                 <span className="text-xs font-medium text-orange-600">3</span>
               </div>
-              <span className="text-sm">Click QR code to download as PNG image</span>
+              <span className="text-sm">Inspect the stored transaction reference</span>
             </div>
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
               <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center">
                 <span className="text-xs font-medium text-orange-600">4</span>
               </div>
-              <span className="text-sm">Scan QR code to verify product authenticity</span>
+              <span className="text-sm">Scan for record details, not proof of authenticity</span>
             </div>
           </div>
           <div className="p-3 rounded-lg bg-orange-50 border border-orange-200">
             <p className="text-sm text-orange-800">
-              <strong>📱 QR Code Features:</strong> Automatically generated QR codes contain product data, eco score, carbon footprint, 
-              and blockchain transaction hash for complete verification.
+              <strong>📱 QR limits:</strong> Owner-supplied references may be placeholders or invalid links.
+              Neither a QR code nor an explorer page independently verifies sustainability.
             </p>
           </div>
         </div>
@@ -297,9 +297,9 @@ export const WelcomeModal = ({ isOpen, onClose, onStartTutorial }: WelcomeModalP
             <h4 className="font-medium mb-2">💡 Quick Tips</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
               <li>• You can always access this tutorial from the help menu</li>
-              <li>• All your data is stored locally and securely</li>
+              <li>• Catalog selections stay in memory; do not enter sensitive data</li>
               <li>• Blockchain transactions are permanent and transparent</li>
-              <li>• QR codes work offline for product verification</li>
+              <li>• QR codes contain sample or self-reported data, not verified product claims</li>
             </ul>
           </div>
         </div>

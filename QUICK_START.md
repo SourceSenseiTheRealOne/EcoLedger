@@ -1,94 +1,27 @@
-# 🚀 EcoLedger - Quick Start Guide
+# EcoLedger — Inspection Quick Start
 
-> **VeChain Hackathon MVP** - Get up and running in 5 minutes!
+**This is not a working-app setup promise.** The inspected default-branch frontend builds, then renders a blank page with `require is not defined`. Presentation changes do not repair that baseline. Do not connect a wallet or submit transactions to verify this slice.
 
-## ⚡ Quick Setup
+## 1. Check presentation copy
 
-### 1. Clone and Install
-```bash
-git clone https://github.com/your-username/EcoLedger.git
-cd frontend
-npm install
-```
-
-### 2. Start Development Server
-```bash
-npm run dev
-```
-
-### 3. Connect Wallet
-1. Install [Sync2](https://sync2.vecha.in/) wallet
-2. Switch to **VeChain Testnet**
-3. Get test VET from [VeChain Faucet](https://faucet.vecha.in/)
-4. Click "Connect Wallet" in the app
-
-### 4. Try the App
-1. **Add Products**: Go to "Add from DB" tab and select products
-2. **Add to Blockchain**: Click "Add to Chain" on any product
-3. **View Blockchain**: Check "Blockchain" tab to see your products
-4. **Scan QR**: Scan QR codes to view transactions on VeChain Explorer
-
-## 🎯 Key Features to Test
-
-### Product Management
-- ✅ **16 Pre-loaded Products** - Sustainable products with real emission factors
-- ✅ **EcoScore Calculation** - Dynamic sustainability scoring (0-100)
-- ✅ **Carbon Footprint** - CO2 emissions in kg and grams
-
-### Blockchain Integration
-- ✅ **Live Transactions** - Real VeChain testnet transactions
-- ✅ **QR Code Verification** - Scan to view on VeChain Explorer
-- ✅ **Wallet Integration** - Seamless VeChain DAppKit integration
-
-### User Interface
-- ✅ **Responsive Design** - Works on mobile and desktop
-- ✅ **Real-time Stats** - Dynamic statistics based on selected products
-- ✅ **Tab Navigation** - Organized interface for different features
-
-## 🔧 Development Commands
+From the repository root, using Node.js:
 
 ```bash
-# Frontend
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
+node --test scripts/test-presentation.mjs
 ```
 
-## 📱 Mobile Testing
+These are dependency-free source-copy assertions. Passing them does not prove rendering, persistence, contract correctness or wallet confirmation.
 
-1. **Start dev server**: `npm run dev`
-2. **Get local IP**: Check terminal for network URL
-3. **Open on mobile**: Use the network URL on your phone
-4. **Test wallet**: Connect VeWorld mobile app
+## 2. Build a sanitized source export
 
-## 🌐 Contract Information
+Follow [local verification](docs/local-development.md) to export only the frontend paths, excluding environment files **before any content is read**. Then install from the unchanged lockfile and build inside that disposable export. Do not run the build in a checkout containing real environment values, copy those values, or add wallet credentials.
 
-- **Network**: VeChain Testnet
-- **Contract**: `0x92e647e3bc952154e8336673c4acd1acdcbe63eb`
-- **Explorer**: [VeChain Explorer](https://explore-testnet.vechain.org/)
+Expected results: the production build succeeds with a large-chunk warning; the production browser boot fails. The full [evidence summary](docs/evidence.md) records failing lint/typecheck and contract/API gates separately.
 
-## 🆘 Troubleshooting
+## 3. Read the system boundaries
 
-### Wallet Issues
-- Ensure you're on **VeChain Testnet**
-- Get test VET from [faucet](https://faucet.vecha.in/)
-- Try refreshing the page
+- [Source architecture](docs/architecture.svg): bundled catalog, real testnet signing path and disconnected standalone API.
+- [Engineering notes](docs/engineering.md): self-reported assertions, mutable ownership, illustrative factors/scores, no-op database submit and unchecked receipt lifecycle.
+- [Project overview](README.md): owner-confirmed hackathon submission and historical companion repository.
 
-### Transaction Issues
-- Check wallet has enough VET for gas
-- Ensure network is VeChain Testnet
-- Try disconnecting and reconnecting wallet
-
-### Build Issues
-- Clear node_modules: `rm -rf node_modules && npm install`
-- Check Node.js version: `node --version` (should be 18+)
-
-## 📚 Learn More
-
-- **Full Documentation**: [README.md](README.md)
-- **VeChain Docs**: [VeChain Documentation](https://docs.vechain.org/)
-- **DAppKit Guide**: [VeChain DAppKit](https://docs.vechain.org/dapp-kit/)
-
----
-
-**Ready to build the future of sustainability tracking! 🌱**
+The public Netlify site is a different asset set with an unverified source revision. It is not evidence that these setup commands produce a functioning app. Deployment, credential review, wallet testing and runtime repair require a separate scope.
